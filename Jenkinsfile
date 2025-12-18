@@ -4,7 +4,7 @@ pipeline {
     environment {
         AWS_REGION = "ap-south-1"
 
-        // load account ID from Jenkins credentials
+        // Load AWS Account ID from Jenkins credentials
         ACCOUNT_ID = credentials('aws-account-id')
 
         FRONTEND_REPO = "${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/mern-frontend"
@@ -12,11 +12,12 @@ pipeline {
     }
 
     stages {
+
         stage('Clone Repo') {
             steps {
                 git branch: 'main',
-                url: 'https://github.com/jay-2000/Mern-stack-via-EKS.git',
-                credentialsId: 'github-token'
+                    url: 'https://github.com/jay-2000/Mern-stack-via-EKS.git',
+                    credentialsId: 'github-token'
             }
         }
 
@@ -44,11 +45,17 @@ pipeline {
             }
         }
 
-        stage('Update Helm Values') {
+        stage('Update Helm Values for GitOps') {
             steps {
                 sh '''
-                sed -i "s/frontendTag:.*/frontendTag: \\"$BUILD_NUMBER\\"/" helm/mern/values.yaml
-                sed -i "s/backendTag:.*/backendTag: \\"$BUILD_NUMBER\\"/" helm/mern/values.yaml
+                # Update frontend tag
+                sed -i "s|tag:.*|tag: \\"$BUILD_NUMBER\\"|g" helm/mern/values.yaml
+
+                # Update backend tag
+                sed -i "0,/tag:/s//tag: \\"$BUILD_NUMBER\\"/" helm/mern/values.yaml
+
+                # Update registry
+                sed -i "s|imageRegistry:.*|imageRegistry: \\"$ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com\\"|" helm/mern/values.yaml
                 '''
             }
         }
@@ -56,8 +63,10 @@ pipeline {
         stage('Push Git Changes') {
             steps {
                 sh '''
+                // git config user.email "jenkins@ci.com" //since we have already added github credential
+                // git config user.name "Jenkins" //since we have already added github credential
                 git add .
-                git commit -m "Update tags to $BUILD_NUMBER" || echo "No changes"
+                git commit -m "Update image tags to $BUILD_NUMBER" || echo "No changes to commit"
                 git push
                 '''
             }

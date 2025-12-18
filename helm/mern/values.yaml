@@ -1,0 +1,16 @@
+imageRegistry: ""
+
+frontend:
+  imageRepo: "mern-frontend"
+  tag: "latest"
+  replicaCount: 1
+
+backend:
+  imageRepo: "mern-backend"
+  tag: "latest"
+  replicaCount: 1
+
+mongodb:
+  image: "mongo"
+  tag: "6"
+  storage: 1Gi
