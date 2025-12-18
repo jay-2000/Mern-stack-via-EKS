@@ -49,13 +49,14 @@ pipeline {
             steps {
                 sh '''
                 # Update frontend tag
-                sed -i "s|tag:.*|tag: \\"$BUILD_NUMBER\\"|g" helm/mern/values.yaml
+                sed -i 's|tag:.*|tag: "${BUILD_NUMBER}"|g' helm/mern-chart/values.yaml
 
                 # Update backend tag
-                sed -i "0,/tag:/s//tag: \\"$BUILD_NUMBER\\"/" helm/mern/values.yaml
+                sed -i "0,/tag:/s//tag: \\"$BUILD_NUMBER\\"/" helm/mern-chart/values.yaml
+                
 
                 # Update registry
-                sed -i "s|imageRegistry:.*|imageRegistry: \\"$ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com\\"|" helm/mern/values.yaml
+                sed -i 's|imageRegistry:.*|imageRegistry: "****.dkr.ecr.ap-south-1.amazonaws.com"|g' helm/mern-chart/values.yaml
                 '''
             }
         }
@@ -63,11 +64,10 @@ pipeline {
         stage('Push Git Changes') {
             steps {
                 sh '''
-                // git config user.email "jenkins@ci.com" //since we have already added github credential
-                // git config user.name "Jenkins" //since we have already added github credential
+                git status
                 git add .
-                git commit -m "Update image tags to $BUILD_NUMBER" || echo "No changes to commit"
-                git push
+                git commit -m "Update Helm image tag to ${BUILD_NUMBER}" || echo "No changes to commit"
+                git push origin main
                 '''
             }
         }
