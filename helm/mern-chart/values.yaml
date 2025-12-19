@@ -1,16 +1,16 @@
-imageRegistry: ""
+imageRegistry: "****.dkr.ecr.ap-south-1.amazonaws.com"
 
 frontend:
   imageRepo: "mern-frontend"
-  tag: "latest"
+  tag: "13" "${BUILD_NUMBER}"
   replicaCount: 1
 
 backend:
   imageRepo: "mern-backend"
-  tag: "latest"
+  tag: "${BUILD_NUMBER}"
   replicaCount: 1
 
 mongodb:
   image: "mongo"
-  tag: "6"
+  tag: "${BUILD_NUMBER}"
   storage: "1Gi"
