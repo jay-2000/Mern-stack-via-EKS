@@ -2,7 +2,7 @@ imageRegistry: "****.dkr.ecr.ap-south-1.amazonaws.com"
 
 frontend:
   imageRepo: "mern-frontend"
-  tag: "11" "${BUILD_NUMBER}"
+  tag: "12" "${BUILD_NUMBER}"
   replicaCount: 1
 
 backend:
