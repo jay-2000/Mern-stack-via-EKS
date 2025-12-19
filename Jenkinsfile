@@ -66,6 +66,7 @@ pipeline {
                 sh '''
                 git config user.name "jay-2000"
                 git config user.email "jayparmar7654321@gmail.com"
+                git remote set-url origin https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/jay-2000/Mern-stack-via-EKS.git
                 git status
                 git add .
                 git commit -m "Update Helm image tag to ${BUILD_NUMBER}" || echo "No changes to commit"
