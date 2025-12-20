@@ -1,4 +1,4 @@
-imageRegistry: ""
+imageRegistry: "633793730349.dkr.ecr.ap-south-1.amazonaws.com"
 
 frontend:
   imageRepo: "mern-frontend"
