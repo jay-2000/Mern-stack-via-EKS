@@ -7,8 +7,9 @@ frontend:
 
 backend:
   imageRepo: "mern-backend"
-  tag: "16"
+  tag: "latest"
   replicaCount: 1
+  mongoUri: "mongodb+srv://jayparmar7654321:8XHqZ67aqvdPazmP@cluster0.ffebnid.mongodb.net/?retryWrites=true&w=majority"
 
 serviceAccount:
   create: false
