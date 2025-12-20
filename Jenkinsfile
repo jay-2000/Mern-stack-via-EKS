@@ -54,19 +54,9 @@ pipeline {
         stage('Update Helm Values (GitOps)') {
             steps {
                 sh '''
-                echo "🔧 Updating Helm values.yaml with new image tags..."
+                chmod +x scripts/update-values.sh
 
-                # Update registry
-                sed -i "s|^imageRegistry:.*|imageRegistry: \\"${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com\\"|" $VALUES_FILE
-
-                # Update frontend tag
-                sed -i "s|tag:.*|tag: \\"${BUILD_NUMBER}\\"|g" $VALUES_FILE
-
-                # Update backend tag
-                sed -i "0,/backend:/!b; :a; n; /tag:/s|tag:.*|tag: \\"${BUILD_NUMBER}\\"|; ta" $VALUES_FILE
-
-                echo "✔ Updated Helm values.yaml:"
-                cat $VALUES_FILE
+                ./scripts/update-values.sh $BUILD_NUMBER $BUILD_NUMBER
                 '''
             }
         }
