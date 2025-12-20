@@ -35,10 +35,20 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                sh """
-                    docker build -t $FRONTEND_REPO:$BUILD_NUMBER frontend/
-                    docker build -t $BACKEND_REPO:$BUILD_NUMBER backend/
-                """
+                script {
+                    // your backend API URL routed through ALB
+                    def BACKEND_API_URL = "http://http://k8s-default-merningr-0d5e0b1ab8-1245109416.ap-south-1.elb.amazonaws.com/api"
+                    // OR if using domain: https://mern.yourdomain.com/api
+
+                    sh """
+                        docker build \
+                            --build-arg REACT_APP_BACKEND_URL=${BACKEND_API_URL} \
+                            -t $FRONTEND_REPO:$BUILD_NUMBER frontend/
+
+                        docker build \
+                            -t $BACKEND_REPO:$BUILD_NUMBER backend/
+                    """
+                }
             }
         }
 
