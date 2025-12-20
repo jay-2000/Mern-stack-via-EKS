@@ -3,6 +3,7 @@
 *.tfstate
 *.tfstate.*
 *.tfvars
+**/.terraform.lock.hcl
 
 # Terraform lock file (optional but recommended to keep)
 !.terraform.lock.hcl
