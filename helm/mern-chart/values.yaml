@@ -1,31 +1,24 @@
 imageRegistry: "****.dkr.ecr.ap-south-1.amazonaws.com"
-
 frontend:
   imageRepo: "mern-frontend"
-  tag: "PLACEHOLDER_FRONTEND_TAG"
+  tag: "20"
   replicaCount: 1
-
 backend:
   imageRepo: "mern-backend"
-  tag: "PLACEHOLDER_BACKEND_TAG"
+  tag: "20"
   replicaCount: 1
   mongoUri: "mongodb+srv://jayparmar7654321_db_user:cMCGfNz1Sf6V6QIO@cluster0.zcmj08i.mongodb.net/mern-db?retryWrites=true&w=majority"
-
 serviceAccount:
   create: false
   name: ""
-
 service:
   type: ClusterIP
   port: 80
-
 ingress:
   enabled: true
-
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 1
-
 httpRoute:
   enabled: false
