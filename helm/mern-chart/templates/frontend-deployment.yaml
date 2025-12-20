@@ -13,7 +13,11 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: frontend
-        image: "{{ .Values.imageRegistry }}/{{ .Values.frontend.imageRepo }}:{{ .Values.frontend.tag }}"
-        ports:
-        - containerPort: 80
+        - name: frontend
+          image: "{{ .Values.imageRegistry }}/{{ .Values.frontend.imageRepo }}:{{ .Values.frontend.tag }}"
+          env:
+            - name: REACT_APP_BACKEND_URL
+              value: "{{ .Values.frontend.backendUrl }}"
+          ports:
+            - containerPort: 80
+

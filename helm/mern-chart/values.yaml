@@ -4,7 +4,6 @@ frontend:
   imageRepo: "mern-frontend"
   tag: "PLACEHOLDER_FRONTEND_TAG"
   replicaCount: 1
-  backendUrl: "http://k8s-default-merningr-0d5e0b1ab8-1245109416.ap-south-1.elb.amazonaws.com"
 
 backend:
   imageRepo: "mern-backend"
