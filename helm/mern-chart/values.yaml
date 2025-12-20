@@ -2,12 +2,12 @@ imageRegistry: "****.dkr.ecr.ap-south-1.amazonaws.com"
 
 frontend:
   imageRepo: "mern-frontend"
-  tag: "15"
+  tag: "16" "${BUILD_NUMBER}"
   replicaCount: 1
 
 backend:
   imageRepo: "mern-backend"
-  tag: "20"
+  tag: "${BUILD_NUMBER}"
   replicaCount: 1
   mongoUri: "mongodb+srv://jayparmar7654321_db_user:cMCGfNz1Sf6V6QIO@cluster0.zcmj08i.mongodb.net/mern-db?retryWrites=true&w=majority"
 
