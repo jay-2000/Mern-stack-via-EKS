@@ -16,7 +16,8 @@ spec:
       - name: backend
         image: "{{ .Values.imageRegistry }}/{{ .Values.backend.imageRepo }}:{{ .Values.backend.tag }}"
         env:
-        - name: MONGO_URI
-          value: "mongodb://mongodb:27017/mern"
-        ports:
-        - containerPort: 5000
+          - name: MONGO_URI
+            valueFrom:
+              secretKeyRef:
+                name: backend-secret
+                key: mongo-uri
