@@ -18,5 +18,12 @@ Thumbs.db
 # Node
 node_modules/
 
+# ----------------------------
+# Kubernetes / EKS
+# ----------------------------
+kubeconfig
+kubeconfig_*
+*.pem
+
 # Jenkins
 secrets/
