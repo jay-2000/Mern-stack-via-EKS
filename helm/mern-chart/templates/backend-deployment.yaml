@@ -21,3 +21,5 @@ spec:
               secretKeyRef:
                 name: backend-secret
                 key: mongo-uri
+        ports:
+          - containerPort: 3500
