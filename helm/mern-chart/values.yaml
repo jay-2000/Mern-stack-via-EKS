@@ -1,40 +1,11 @@
-imageRegistry: "ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com"
+imageRegistry: ""
 
 frontend:
-  name: frontend
-  repository: mern-frontend
+  imageRepo: "mern-frontend"
   tag: "latest"
-  port: 80
+  replicaCount: 1
 
 backend:
-  name: backend
-  repository: mern-backend
+  imageRepo: "mern-backend"
   tag: "latest"
-  port: 5000
-
-replicaCount: 1
-
-service:
-  type: ClusterIP
-  port: 80
-
-serviceAccount:
-  create: true
-  name: ""
-
-ingress:
-  enabled: false
-
-httpRoute:
-  enabled: false
-
-autoscaling:
-  enabled: false
-
-resources: {}
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+  replicaCount: 1
