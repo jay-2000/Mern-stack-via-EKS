@@ -7,7 +7,7 @@ frontend:
 
 backend:
   imageRepo: "mern-backend"
-  tag: "latest"
+  tag: "16"
   replicaCount: 1
 
 serviceAccount:
@@ -24,7 +24,7 @@ ingress:
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 1
 
 httpRoute:
   enabled: false
