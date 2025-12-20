@@ -1,12 +1,30 @@
-imageRegistry: "****.dkr.ecr.ap-south-1.amazonaws.com"
+imageRegistry: ""
 
 frontend:
   imageRepo: "mern-frontend"
-  tag: "14" "${BUILD_NUMBER}"
+  tag: "latest"
   replicaCount: 1
 
 backend:
   imageRepo: "mern-backend"
-  tag: "${BUILD_NUMBER}"
+  tag: "latest"
   replicaCount: 1
-  
+
+serviceAccount:
+  create: false
+  name: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+
+httpRoute:
+  enabled: false
