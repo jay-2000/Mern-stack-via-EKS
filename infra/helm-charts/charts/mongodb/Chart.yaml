@@ -1,5 +1,0 @@
-apiVersion: v2
-name: mongodb
-description: Minimal single-replica mongodb (StatefulSet)
-version: 0.1.0
-appVersion: "6.0"
