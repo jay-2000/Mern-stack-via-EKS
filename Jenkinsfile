@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     // your backend API URL routed through ALB
-                    def BACKEND_API_URL = "http://k8s-default-merningr-0d5e0b1ab8-1245109416.ap-south-1.elb.amazonaws.com/api"
+                    def BACKEND_API_URL = "http://k8s-default-merningr-0d5e0b1ab8-1102402298.ap-south-1.elb.amazonaws.com/api"
                     // OR if using domain: https://mern.yourdomain.com/api
 
                     sh """
