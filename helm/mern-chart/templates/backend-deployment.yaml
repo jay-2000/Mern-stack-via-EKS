@@ -13,13 +13,13 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: "{{ .Values.imageRegistry }}/{{ .Values.backend.imageRepo }}:{{ .Values.backend.tag }}"
-        env:
-          - name: MONGO_URI
-            valueFrom:
-              secretKeyRef:
-                name: backend-secret
-                key: mongo-uri
-        ports:
-          - containerPort: 3500
+        - name: backend
+          image: "{{ .Values.imageRegistry }}/{{ .Values.backend.imageRepo }}:{{ .Values.backend.tag }}"
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: mongo-uri
+          ports:
+            - containerPort: 3500
